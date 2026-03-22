@@ -20,7 +20,7 @@ export default function TestimonialCard({ testimonial, index }) {
       </div>
 
       {/* Review Text */}
-      <p className="text-gray-700 mb-4 italic">"{testimonial.review}"</p>
+      <p className="text-gray-700 mb-4 italic">&ldquo;{testimonial.review}&rdquo;</p>
 
       {/* Customer Info */}
       <div className="flex items-center">

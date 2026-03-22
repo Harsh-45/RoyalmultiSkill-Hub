@@ -48,7 +48,7 @@ export default function ContactPage() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-xl text-gray-100 max-w-3xl mx-auto"
           >
-            We'd love to hear from you. Reach out for bookings, inquiries, or just to say hello!
+            We&apos;d love to hear from you. Reach out for bookings, inquiries, or just to say hello!
           </motion.p>
         </div>
       </section>

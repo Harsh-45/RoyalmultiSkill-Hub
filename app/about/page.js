@@ -89,9 +89,9 @@ export default function AboutPage() {
                   small tattoo studio has evolved into a comprehensive beauty and art destination.
                 </p>
                 <p>
-                  We believe that everyone deserves to feel confident and beautiful in their own skin. 
-                  Whether it's through a meaningful tattoo that tells your story or a beauty treatment 
-                  that enhances your natural radiance, we're here to help you express yourself.
+                  We believe that everyone deserves to feel confident and beautiful in their own skin.
+                  Whether it&apos;s through a meaningful tattoo that tells your story or a beauty treatment
+                  that enhances your natural radiance, we&apos;re here to help you express yourself.
                 </p>
                 <p>
                   Our journey has been marked by countless smiles, transformations, and the trust of 
