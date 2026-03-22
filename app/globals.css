@@ -63,6 +63,25 @@ body {
   background: linear-gradient(180deg, #db2777 0%, #dc2626 100%);
 }
 
+/* Custom scrollbar for service cards */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #ec4899 0%, #ef4444 100%);
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #db2777 0%, #dc2626 100%);
+}
+
 /* Gradient text */
 .gradient-text {
   background: linear-gradient(135deg, #ec4899 0%, #ef4444 100%);

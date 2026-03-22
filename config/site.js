@@ -48,7 +48,7 @@ export const siteConfig = {
     
     // Short address for display
     get short() {
-      return `${this.area}, ${this.city}`;
+      return `${this.street}, ${this.area}, ${this.city}`;
     }
   },
   
@@ -57,20 +57,31 @@ export const siteConfig = {
     // Get embed URL from: https://www.google.com/maps
     // Click Share → Embed a map → Copy the src URL from iframe
     embedUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3715.412321757479!2d80.37872137528842!3d21.373663680363375!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a2bb90c70d11665%3A0x4485a338fbe23260!2sNew%20Royal%20Beauty%20Salon%20%26%20Tattoo%20Studio!5e0!3m2!1sen!2sin!4v1774171874761!5m2!1sen!2sin",
-    
+
     // Direct Google Maps link (for "Get Directions" button)
     directionsUrl: "https://maps.app.goo.gl/gLEufXwxakBA8k4K8",
+  },
+
+  // Google Reviews
+  reviews: {
+    // Google Reviews link - Get this from your Google Business Profile
+    // Go to: https://business.google.com → Get more reviews → Copy link
+    // Or use the format: https://g.page/r/YOUR_PLACE_ID/review
+    googleReviewsUrl: "https://g.page/r/CWAy4vs4o4VEEBM/review",
+
+    // Link to view all reviews
+    viewReviewsUrl: "https://maps.app.goo.gl/gLEufXwxakBA8k4K8",
   },
   
   // Business Hours
   hours: {
     weekdays: {
-      days: "Monday - Saturday",
+      days: "Monday - Sunday",
       time: "10:00 AM - 8:00 PM"
     },
     weekend: {
-      days: "Sunday",
-      time: "11:00 AM - 8:00 PM"
+      days: "",
+      time: ""
     },
     note: "Walk-ins welcome, but appointments are recommended"
   },

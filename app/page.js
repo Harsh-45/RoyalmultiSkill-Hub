@@ -3,42 +3,27 @@
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import Image from 'next/image'
-import TestimonialCard from '@/components/TestimonialCard'
+import siteConfig from '@/config/site'
+import { FaStar } from 'react-icons/fa'
 
 export default function Home() {
-  const testimonials = [
-    {
-      name: 'Priya Sharma',
-      service: 'Bridal Makeup',
-      review: 'Amazing service! The team made me look absolutely stunning on my wedding day. Highly recommended!',
-    },
-    {
-      name: 'Rahul Verma',
-      service: 'Custom Tattoo',
-      review: 'Got my first tattoo here and the experience was incredible. Professional, hygienic, and the design came out perfect!',
-    },
-    {
-      name: 'Sneha Patel',
-      service: 'Hair Treatment',
-      review: 'The keratin treatment transformed my hair completely. Best salon experience ever!',
-    },
-  ]
+
 
   const featuredWorks = [
     {
-      title: 'Minimal Tattoo',
+      title: 'Custom Tattoo',
       image: 'https://images.unsplash.com/photo-1611501275019-9b5cda994e8d?w=500',
       category: 'Tattoo',
     },
     {
       title: 'Bridal Makeup',
       image: 'https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=500',
-      category: 'Beauty',
+      category: 'Bridal',
     },
     {
-      title: 'Portrait Tattoo',
-      image: 'https://images.unsplash.com/photo-1590246814883-57c511a8c4b9?w=500',
-      category: 'Tattoo',
+      title: 'Hair Styling',
+      image: 'https://images.unsplash.com/photo-1560066984-138dadb4c035?w=500',
+      category: 'Hair',
     },
   ]
 
@@ -214,32 +199,49 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Testimonials Section */}
-      <section className="py-20 bg-beauty-gradient">
+      {/* Google Reviews Section */}
+      <section className="py-20 bg-gradient-to-b from-primary-50 to-primary-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center mb-12"
+            className="text-center"
           >
-            <h2 className="text-4xl md:text-5xl font-display font-bold text-gray-800 mb-4">
+            <h2 className="text-4xl md:text-5xl font-display font-bold text-neutral-800 mb-4">
               What Our Clients Say
             </h2>
-            <p className="text-gray-600 text-lg">
-              Real experiences from our valued customers
+            <p className="text-neutral-600 text-lg mb-8">
+              Read reviews from our valued customers on Google
             </p>
-          </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {testimonials.map((testimonial, index) => (
-              <TestimonialCard
-                key={index}
-                testimonial={testimonial}
-                index={index}
-              />
-            ))}
-          </div>
+            {/* Google Reviews Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <motion.a
+                href={siteConfig.reviews.viewReviewsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="inline-flex items-center gap-2 px-8 py-4 bg-white text-neutral-800 rounded-full font-semibold shadow-lg hover:shadow-xl transition-all border-2 border-primary-500"
+              >
+                <FaStar className="text-yellow-500" />
+                View All Google Reviews
+              </motion.a>
+
+              <motion.a
+                href={siteConfig.reviews.googleReviewsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-primary-500 to-accent-500 text-white rounded-full font-semibold shadow-lg hover:shadow-xl transition-all"
+              >
+                <FaStar className="text-yellow-300" />
+                Write a Review
+              </motion.a>
+            </div>
+          </motion.div>
         </div>
       </section>
 

@@ -18,6 +18,18 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'unset'
+    }
+    return () => {
+      document.body.style.overflow = 'unset'
+    }
+  }, [isOpen])
+
   const navLinks = [
     { name: 'Home', href: '/' },
     { name: 'Services', href: '/services' },
@@ -32,7 +44,9 @@ export default function Navbar() {
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
       className={`fixed w-full z-50 transition-all duration-300 ${
-        scrolled
+        isOpen
+          ? 'bg-neutral-950 shadow-2xl border-b border-primary-500/20'
+          : scrolled
           ? 'bg-neutral-950/95 backdrop-blur-lg shadow-2xl border-b border-primary-500/20'
           : 'bg-neutral-950/80 backdrop-blur-md'
       }`}
@@ -75,54 +89,56 @@ export default function Navbar() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden text-white text-2xl z-50 hover:text-primary-400 transition-colors"
+            className="md:hidden text-white text-2xl z-[60] relative hover:text-primary-400 transition-colors"
           >
             {isOpen ? <FaTimes /> : <FaBars />}
           </button>
         </div>
       </div>
 
-      {/* Mobile Menu */}
-      <motion.div
-        initial={{ opacity: 0, x: '100%' }}
-        animate={{ opacity: isOpen ? 1 : 0, x: isOpen ? 0 : '100%' }}
-        transition={{ duration: 0.3 }}
-        className={`md:hidden fixed inset-0 bg-neutral-950/98 backdrop-blur-lg ${
-          isOpen ? 'pointer-events-auto' : 'pointer-events-none'
-        }`}
-      >
-        <div className="flex flex-col items-center justify-center h-full space-y-8">
-          {navLinks.map((link, index) => (
+      {/* Mobile Menu Overlay - Full Screen Solid Background */}
+      {isOpen && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.3 }}
+          className="md:hidden fixed inset-0 w-full h-full bg-neutral-950 z-[55] overflow-hidden"
+          style={{ top: 0, left: 0, right: 0, bottom: 0 }}
+        >
+          <div className="flex flex-col items-center justify-center h-screen w-full space-y-8 px-6">
+            {navLinks.map((link, index) => (
+              <motion.div
+                key={link.name}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1, duration: 0.3 }}
+              >
+                <Link
+                  href={link.href}
+                  onClick={() => setIsOpen(false)}
+                  className="text-white text-3xl font-display font-semibold hover:text-primary-400 transition-colors duration-300 active:scale-95 transform block"
+                >
+                  {link.name}
+                </Link>
+              </motion.div>
+            ))}
             <motion.div
-              key={link.name}
               initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: isOpen ? 1 : 0, y: isOpen ? 0 : 20 }}
-              transition={{ delay: index * 0.1 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: navLinks.length * 0.1, duration: 0.3 }}
             >
               <Link
-                href={link.href}
+                href="/contact"
                 onClick={() => setIsOpen(false)}
-                className="text-white text-2xl hover:text-beauty-accent transition-colors duration-300"
+                className="btn-primary bg-gradient-to-r from-primary-500 to-accent-500 text-white hover:from-primary-600 hover:to-accent-600 shadow-lg text-lg px-8 py-4 inline-block"
               >
-                {link.name}
+                Book Now
               </Link>
             </motion.div>
-          ))}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: isOpen ? 1 : 0, y: isOpen ? 0 : 20 }}
-            transition={{ delay: navLinks.length * 0.1 }}
-          >
-            <Link
-              href="/contact"
-              onClick={() => setIsOpen(false)}
-              className="btn-primary btn-tattoo"
-            >
-              Book Now
-            </Link>
-          </motion.div>
-        </div>
-      </motion.div>
+          </div>
+        </motion.div>
+      )}
     </motion.nav>
   )
 }
