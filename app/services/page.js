@@ -99,7 +99,7 @@ export default function ServicesPage() {
               Contact us now to schedule your appointment
             </p>
             <a
-              href="https://wa.me/919876543210?text=Hi! I want to book an appointment"
+              href="https://wa.me/917264939526?text=Hi! I want to book an appointment"
               target="_blank"
               rel="noopener noreferrer"
               className="btn-primary btn-tattoo inline-block"

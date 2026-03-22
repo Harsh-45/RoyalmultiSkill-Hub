@@ -135,7 +135,7 @@ Edit the WhatsApp number in:
 - `components/Footer.js`
 - `app/contact/page.js`
 
-Replace `919876543210` with your actual WhatsApp number.
+Replace `917264939526` with your actual WhatsApp number if different.
 
 ### Update Services & Pricing
 

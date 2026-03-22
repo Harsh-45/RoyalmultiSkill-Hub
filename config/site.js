@@ -70,7 +70,7 @@ export const siteConfig = {
     },
     weekend: {
       days: "Sunday",
-      time: "11:00 AM - 6:00 PM"
+      time: "11:00 AM - 8:00 PM"
     },
     note: "Walk-ins welcome, but appointments are recommended"
   },

@@ -94,7 +94,7 @@ export default function PortfolioPage() {
               Book your appointment and let us create your masterpiece
             </p>
             <a
-              href="https://wa.me/919876543210?text=Hi! I want to book an appointment"
+              href="https://wa.me/917264939526?text=Hi! I want to book an appointment"
               target="_blank"
               rel="noopener noreferrer"
               className="btn-primary btn-beauty inline-block"

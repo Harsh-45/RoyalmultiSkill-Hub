@@ -239,7 +239,7 @@ export default function AboutPage() {
               Experience the Royal Multiskill Hub difference today
             </p>
             <a
-              href="https://wa.me/919876543210?text=Hi! I want to book an appointment"
+              href="https://wa.me/917264939526?text=Hi! I want to book an appointment"
               target="_blank"
               rel="noopener noreferrer"
               className="btn-primary bg-white text-tattoo-dark hover:bg-gray-100 inline-block"
