@@ -55,7 +55,7 @@ export default function AboutPage() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="text-5xl md:text-6xl font-display font-bold mb-6"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-4 md:mb-6"
           >
             About Us
           </motion.h1>
@@ -63,7 +63,7 @@ export default function AboutPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-xl text-gray-100 max-w-3xl mx-auto"
+            className="text-base sm:text-lg md:text-xl text-gray-100 max-w-3xl mx-auto"
           >
             Where art meets beauty, and confidence is born
           </motion.p>
@@ -80,10 +80,10 @@ export default function AboutPage() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="text-4xl md:text-5xl font-display font-bold mb-6 gradient-text">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-4 md:mb-6 gradient-text">
                 Our Story
               </h2>
-              <div className="space-y-4 text-gray-300 text-lg">
+              <div className="space-y-4 text-gray-300 text-sm sm:text-base md:text-lg">
                 <p>
                   Royal Multiskill Hub was born from a passion for art and beauty. What started as a 
                   small tattoo studio has evolved into a comprehensive beauty and art destination.
@@ -232,10 +232,10 @@ export default function AboutPage() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-4xl md:text-5xl font-display font-bold mb-6">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-4 md:mb-6">
               Join Our Family
             </h2>
-            <p className="text-xl mb-8">
+            <p className="text-base sm:text-lg md:text-xl mb-6 md:mb-8">
               Experience the Royal Multiskill Hub difference today
             </p>
             <a

@@ -38,7 +38,7 @@ export default function ContactPage() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="text-5xl md:text-6xl font-display font-bold mb-6"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-4 md:mb-6"
           >
             Get In Touch
           </motion.h1>
@@ -46,7 +46,7 @@ export default function ContactPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-xl text-gray-100 max-w-3xl mx-auto"
+            className="text-base sm:text-lg md:text-xl text-gray-100 max-w-3xl mx-auto"
           >
             We&apos;d love to hear from you. Reach out for bookings, inquiries, or just to say hello!
           </motion.p>
@@ -64,7 +64,7 @@ export default function ContactPage() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="text-4xl font-display font-bold text-white mb-8">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-display font-bold text-white mb-6 md:mb-8">
                 Contact Information
               </h2>
 

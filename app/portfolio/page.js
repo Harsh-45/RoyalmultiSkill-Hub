@@ -18,7 +18,7 @@ export default function PortfolioPage() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-4 md:mb-6"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-4 md:mb-6"
           >
             Our Portfolio
           </motion.h1>
@@ -26,7 +26,7 @@ export default function PortfolioPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-base md:text-xl text-neutral-100 max-w-3xl mx-auto px-4"
+            className="text-sm sm:text-base md:text-xl text-neutral-100 max-w-3xl mx-auto px-4"
           >
             Stunning tattoo art and beauty transformations
           </motion.p>
@@ -87,10 +87,10 @@ export default function PortfolioPage() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-neutral-800 mb-4 md:mb-6">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-display font-bold text-neutral-800 mb-4 md:mb-6">
               Want to Be Featured?
             </h2>
-            <p className="text-base md:text-xl mb-6 md:mb-8 text-neutral-600 px-4">
+            <p className="text-sm sm:text-base md:text-xl mb-6 md:mb-8 text-neutral-600 px-4">
               Book your appointment and let us create your masterpiece
             </p>
             <a

@@ -17,6 +17,13 @@ html {
 body {
   font-family: 'Inter', sans-serif;
   overflow-x: hidden;
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  body {
+    font-size: 16px;
+  }
 }
 
 /* Glassmorphism utility classes */

@@ -18,7 +18,7 @@ export default function ServicesPage() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-4 md:mb-6"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-4 md:mb-6"
           >
             Our Services
           </motion.h1>
@@ -26,7 +26,7 @@ export default function ServicesPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-base md:text-xl text-neutral-100 max-w-3xl mx-auto px-4"
+            className="text-sm sm:text-base md:text-xl text-neutral-100 max-w-3xl mx-auto px-4"
           >
             Premium tattoo and beauty services tailored for you
           </motion.p>
@@ -42,10 +42,10 @@ export default function ServicesPage() {
             viewport={{ once: true }}
             className="text-center mb-8 md:mb-12"
           >
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-white mb-3 md:mb-4">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-display font-bold text-white mb-3 md:mb-4">
               Tattoo Services
             </h2>
-            <p className="text-neutral-300 text-base md:text-lg px-4">
+            <p className="text-neutral-300 text-sm sm:text-base md:text-lg px-4">
               Professional custom tattoos with premium quality ink
             </p>
           </motion.div>
@@ -69,10 +69,10 @@ export default function ServicesPage() {
             viewport={{ once: true }}
             className="text-center mb-8 md:mb-12"
           >
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-neutral-800 mb-3 md:mb-4">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-display font-bold text-neutral-800 mb-3 md:mb-4">
               Beauty Services
             </h2>
-            <p className="text-neutral-600 text-base md:text-lg px-4">
+            <p className="text-neutral-600 text-sm sm:text-base md:text-lg px-4">
               Comprehensive beauty treatments for your transformation
             </p>
           </motion.div>
@@ -93,10 +93,10 @@ export default function ServicesPage() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-4xl md:text-5xl font-display font-bold mb-6">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-4 md:mb-6">
               Ready to Book?
             </h2>
-            <p className="text-xl mb-8 text-gray-300">
+            <p className="text-base sm:text-lg md:text-xl mb-6 md:mb-8 text-gray-300">
               Contact us now to schedule your appointment
             </p>
             <a

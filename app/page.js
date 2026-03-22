@@ -51,7 +51,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.6 }}
-              className="text-5xl md:text-7xl font-display font-bold text-white mb-6 text-shadow-lg"
+              className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-display font-bold text-white mb-4 md:mb-6 text-shadow-lg"
             >
               Ink Your
               <span className="block bg-gradient-to-r from-primary-400 to-accent-400 bg-clip-text text-transparent">Story</span>
@@ -60,7 +60,7 @@ export default function Home() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.5, duration: 0.6 }}
-              className="text-neutral-200 text-lg mb-8 max-w-md mx-auto leading-relaxed"
+              className="text-neutral-200 text-sm sm:text-base md:text-lg mb-6 md:mb-8 max-w-md mx-auto leading-relaxed"
             >
               Professional custom tattoos with premium quality ink and hygiene standards
             </motion.p>
@@ -96,7 +96,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.6 }}
-              className="text-5xl md:text-7xl font-display font-bold text-neutral-800 mb-6 text-shadow"
+              className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-display font-bold text-neutral-800 mb-4 md:mb-6 text-shadow"
             >
               Embrace Your
               <span className="block bg-gradient-to-r from-primary-500 to-accent-500 bg-clip-text text-transparent">Beauty</span>
@@ -105,7 +105,7 @@ export default function Home() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.5, duration: 0.6 }}
-              className="text-neutral-700 text-lg mb-8 max-w-md mx-auto leading-relaxed"
+              className="text-neutral-700 text-sm sm:text-base md:text-lg mb-6 md:mb-8 max-w-md mx-auto leading-relaxed"
             >
               Premium beauty services from hair care to facials, designed to make you shine
             </motion.p>
@@ -281,10 +281,10 @@ export default function Home() {
             viewport={{ once: true }}
             className="text-center mb-12"
           >
-            <h2 className="text-4xl md:text-5xl font-display font-bold mb-4">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-3 md:mb-4">
               Your Safety, Our Priority
             </h2>
-            <p className="text-gray-400 text-lg">
+            <p className="text-gray-400 text-sm sm:text-base md:text-lg">
               We maintain the highest standards of hygiene and safety
             </p>
           </motion.div>
