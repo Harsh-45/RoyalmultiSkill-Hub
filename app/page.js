@@ -122,21 +122,30 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* Brand Tagline Section */}
-      <section className="py-20 bg-gradient-to-b from-neutral-950 to-neutral-900 text-white text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-        >
-          <h1 className="text-4xl md:text-6xl font-display font-bold gradient-text mb-4">
-            Royal Multiskill Hub
-          </h1>
-          <p className="text-2xl md:text-3xl text-neutral-300 tracking-widest">
-            Ink • Beauty • Confidence
-          </p>
-        </motion.div>
+      {/* Video Section */}
+      <section className="py-6 md:py-10 bg-black">
+        <div className="mx-auto px-4 sm:px-6 lg:px-8 flex justify-center items-center">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="rounded-2xl overflow-hidden shadow-2xl"
+            style={{ maxHeight: '80vh' }}
+          >
+            <video
+              autoPlay
+              loop
+              playsInline
+              controls
+              className="w-auto h-auto"
+              style={{ maxHeight: '80vh', maxWidth: '100%' }}
+            >
+              <source src="/homepage.mov" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </motion.div>
+        </div>
       </section>
 
       {/* Featured Works Section */}
