@@ -15,7 +15,7 @@ Open [http://localhost:3000](http://localhost:3000). Code changes refresh automa
 
 ```bash
 npm run lint    # Check code
-npm test        # Check booking rules, authentication and storage
+npm test       # Check bookings, authentication, and portfolio loading
 npm run build  # Create a production build
 npm start      # Serve the production build
 ```
@@ -24,9 +24,9 @@ npm start      # Serve the production build
 
 ```text
 app/
-  page.js                 Home
+  page.js                 Home with automatically loaded studio photos
   services/page.js        Tattoo, piercing, and beauty services
-  portfolio/page.js       Filterable reference gallery
+  portfolio/page.js       Filterable portfolio of uploaded studio photos
   about/page.js           Studio introduction
   contact/page.js         Booking form, contact details, map, and opening hours
   book/page.js            Customer date/time booking form
@@ -35,6 +35,8 @@ app/
   owner/page.js           Password-protected booking dashboard
   api/bookings/           Availability, requests, private status, and batch history API
   api/owner/              Owner sessions and booking decisions
+  privacy/page.js         Appointment and third-party service privacy information
+  terms/page.js           Website and Google Maps service terms
   layout.js               Shared layout and metadata
   globals.css             Shared styles and CSS animations
 components/
@@ -50,18 +52,23 @@ components/
   MyRequests.js           Browser-saved requests and current status
   OwnerDashboard.js       Owner sign-in, requests, approval, and cancellation
   ServiceCard.js          Service and pricing card
+  HomePage.js             Animated home page content
+  PortfolioGallery.js     Portfolio filters and category empty states
   GalleryGrid.js          Filters and keyboard-accessible image dialog
+  ReviewsSection.js       Direct links to read and write Google reviews
   WhatsAppButton.js       Floating enquiry link
   TestimonialCard.js      Optional review card; currently unused
 config/site.js            Business information and contact configuration
 data/services.js          Service categories and prices
-data/portfolio.js         Gallery images, metadata, and categories
+data/portfolio.js         Public category exports
+data/portfolio-categories.mjs Portfolio folder/category definitions
+public/portfolio/         Your studio photos, organised by service
 public/                   Local images, video, and other static assets
 lib/                      Booking rules, authentication, API helpers, and storage
 database/bookings.sql     Shared Supabase database and atomic booking operations
 database/booking-retention.sql Existing-project upgrade for automatic cleanup
 scripts/setup-bookings.mjs Local owner credential setup
-tests/                    Booking and authentication tests (Node test runner)
+tests/                    Booking and portfolio tests (Node test runner)
 tailwind.config.js        Theme colors and typography
 next.config.js            Next.js and remote-image configuration
 ```
@@ -70,11 +77,38 @@ next.config.js            Next.js and remote-image configuration
 
 - **Business details:** Edit `config/site.js` for the name, phone, WhatsApp, social links, address, maps, hours, and metadata. Contact links and enquiry messages use this central configuration.
 - **Services and prices:** Edit `data/services.js`. Piercing currently has a consultation entry with “Enquire for pricing”; replace it with the confirmed service names and prices when supplied. Existing tattoo and beauty prices remain in the same file.
-- **Gallery:** Edit `data/portfolio.js`. Current Unsplash photographs are reference imagery, not a claim of work completed by the studio. Replace them with actual studio photographs; place local files in `public/` and use paths such as `/images/tattoo-01.jpg`. Add piercing images with `category: 'Piercing'` and `theme: 'piercing'`. The piercing filter has an enquiry state until photographs are added. Homepage and studio-page editorial images are configured in their page files.
+- **Gallery:** Add your studio photos to the category folders under `public/portfolio/`; see the upload instructions below. The portfolio and home-page work preview detect files automatically on the next build. Empty categories have a clear coming-soon state, with no stock-image fallback. Other editorial images used in the hero and service sections are configured in their page components.
 - **Visual design:** Edit `app/globals.css` and `tailwind.config.js`. Use `Reveal` for consistent entrance animations; `MotionProvider` and reduced-motion CSS handle visitor preferences.
-- **Reviews:** `TestimonialCard` accepts a `testimonial` object with `name`, `review`, optional `service`, `rating`, and `source`, plus an optional `index`. It shows a Google label only when `source` is explicitly `Google`. Supply verified review content before using it.
+- **Reviews:** The home page links directly to the studio's Google reviews and review form. Update `reviews.viewReviewsUrl` and `reviews.googleReviewsUrl` in `config/site.js` to change these destinations.
 
-Gallery photographs are bundled locally; Google Fonts and the Google Maps embed require an internet connection. Additional remote image hosts must be allowed in `next.config.js`. Business details come from `config/site.js`; `.env.example` describes server-only booking settings.
+Portfolio photographs are bundled locally; Google Fonts, the Google Maps embed, and external links require an internet connection. Business details come from `config/site.js`; `.env.example` describes server-only booking settings.
+
+## Add portfolio photos
+
+Upload photos into the matching folders:
+
+```text
+public/portfolio/
+  tattoo/
+  piercing/
+  beauty/
+    bridal/
+    makeup/
+    hair/
+    facial/
+    waxing/
+    threading/
+```
+
+Use JPG/JPEG, PNG, WebP or AVIF. Convert iPhone HEIC files first. Use clear filenames such as `rose-tattoo.jpg` or `01-ear-piercing.webp`. A number prefix sets display order; captions show only the service category, without numbers. Keep photos directly inside a listed category folder. Images are public, so upload only photos intended for the website. Suggested size: 1200–2400px on the longest side, under 2 MB per photo for mobile visitors.
+
+Commit and push the photos to GitHub. Vercel's next build automatically adds them to the correct portfolio category and selects images for the home-page preview; no JavaScript editing is required. Removing a photo and redeploying removes it from the gallery too. Restart `npm run dev` if newly added files do not appear locally; production always needs a new build. Detailed instructions are in `public/portfolio/README.md`.
+
+## Google reviews
+
+The Reviews section has **Read Google reviews** and **Write a review** links. Customers open the studio's Google listing to read reviews or Google's review form to leave one. The website does not fetch or display review text, ratings, or reviewer details.
+
+Both destinations are configured under `reviews` in `config/site.js`. No Google API key, Google Cloud project, account authorization, environment variables, or paid service is needed for these links. Commit and push website changes to deploy them through Vercel.
 
 ## Appointment bookings
 

@@ -78,6 +78,9 @@ export default function Footer() {
         <div className="flex flex-wrap justify-between gap-3 border-t border-paper/10 py-5 text-[10px] leading-5 tracking-[0.05em] text-paper/40">
           <p>© {currentYear} {siteConfig.businessName}. All rights reserved.</p>
           <div className="flex flex-wrap items-center gap-x-5">
+            <Link href="/#reviews" className="inline-flex min-h-[44px] items-center py-2 transition-colors hover:text-gold">Reviews</Link>
+            <Link href="/privacy" className="inline-flex min-h-[44px] items-center py-2 transition-colors hover:text-gold">Privacy</Link>
+            <Link href="/terms" className="inline-flex min-h-[44px] items-center py-2 transition-colors hover:text-gold">Website terms</Link>
             <Link href="/my-requests" className="inline-flex min-h-[44px] items-center py-2 transition-colors hover:text-gold">My requests</Link>
             <Link href="/owner" className="inline-flex min-h-[44px] items-center py-2 transition-colors hover:text-gold">Owner sign in</Link>
           </div>

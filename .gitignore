@@ -26,6 +26,9 @@ yarn-error.log*
 .env*.local
 .booking-data/
 
+# original photo uploads (web-ready copies live in public/portfolio)
+.portfolio-originals/
+
 # vercel
 .vercel
 
