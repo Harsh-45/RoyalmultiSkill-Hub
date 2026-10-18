@@ -1,327 +1,524 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { useRef, useState } from 'react'
+import {
+  motion,
+  useReducedMotion,
+  useScroll,
+  useTransform
+} from 'framer-motion'
 import Link from 'next/link'
 import Image from 'next/image'
+import { FiArrowDown, FiArrowUpRight, FiPause, FiPlay } from 'react-icons/fi'
 import siteConfig from '@/config/site'
-import { FaStar } from 'react-icons/fa'
+import { portfolioImages } from '@/data/portfolio'
+import { servicesData, getCategoriesByTheme } from '@/data/services'
+import Reveal from '@/components/Reveal'
+import BookingCTA from '@/components/BookingCTA'
 
-export default function Home() {
-
-
-  const featuredWorks = [
-    {
-      title: 'Custom Tattoo',
-      image: 'https://images.unsplash.com/photo-1611501275019-9b5cda994e8d?w=500',
-      category: 'Tattoo',
-    },
-    {
-      title: 'Bridal Makeup',
-      image: 'https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=500',
-      category: 'Bridal',
-    },
-    {
-      title: 'Hair Styling',
-      image: 'https://images.unsplash.com/photo-1560066984-138dadb4c035?w=500',
-      category: 'Hair',
-    },
-  ]
-
+function PiercingArtwork() {
   return (
-    <div className="min-h-screen">
-      {/* Hero Section - Split Theme */}
-      <section className="min-h-screen flex flex-col lg:flex-row">
-        {/* Tattoo Side - Dark */}
-        <motion.div
-          initial={{ opacity: 0, x: -100 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8 }}
-          className="w-full lg:w-1/2 bg-tattoo-gradient min-h-screen flex items-center justify-center p-8 relative overflow-hidden"
-        >
-          <div className="absolute inset-0 opacity-5">
-            <Image
-              src="https://images.unsplash.com/photo-1590246814883-57c511a8c4b9?w=1200"
-              alt="Tattoo background"
-              fill
-              className="object-cover"
-            />
-          </div>
-          <div className="relative z-10 text-center">
-            <motion.h2
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3, duration: 0.6 }}
-              className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-display font-bold text-white mb-4 md:mb-6 text-shadow-lg"
-            >
-              Ink Your
-              <span className="block bg-gradient-to-r from-primary-400 to-accent-400 bg-clip-text text-transparent">Story</span>
-            </motion.h2>
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.5, duration: 0.6 }}
-              className="text-neutral-200 text-sm sm:text-base md:text-lg mb-6 md:mb-8 max-w-md mx-auto leading-relaxed"
-            >
-              Professional custom tattoos with premium quality ink and hygiene standards
-            </motion.p>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.7, duration: 0.6 }}
-            >
-              <Link href="/portfolio" className="btn-primary bg-gradient-to-r from-primary-500 to-accent-500 text-white hover:from-primary-600 hover:to-accent-600">
-                View Tattoo Portfolio
-              </Link>
-            </motion.div>
-          </div>
-        </motion.div>
-
-        {/* Beauty Side - Light */}
-        <motion.div
-          initial={{ opacity: 0, x: 100 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8 }}
-          className="w-full lg:w-1/2 bg-beauty-gradient min-h-screen flex items-center justify-center p-8 relative overflow-hidden"
-        >
-          <div className="absolute inset-0 opacity-5">
-            <Image
-              src="https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=1200"
-              alt="Beauty background"
-              fill
-              className="object-cover"
-            />
-          </div>
-          <div className="relative z-10 text-center">
-            <motion.h2
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3, duration: 0.6 }}
-              className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-display font-bold text-neutral-800 mb-4 md:mb-6 text-shadow"
-            >
-              Embrace Your
-              <span className="block bg-gradient-to-r from-primary-500 to-accent-500 bg-clip-text text-transparent">Beauty</span>
-            </motion.h2>
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.5, duration: 0.6 }}
-              className="text-neutral-700 text-sm sm:text-base md:text-lg mb-6 md:mb-8 max-w-md mx-auto leading-relaxed"
-            >
-              Premium beauty services from hair care to facials, designed to make you shine
-            </motion.p>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.7, duration: 0.6 }}
-            >
-              <Link href="/services" className="btn-primary bg-gradient-to-r from-primary-500 to-accent-500 text-white hover:from-primary-600 hover:to-accent-600">
-                Explore Beauty Services
-              </Link>
-            </motion.div>
-          </div>
-        </motion.div>
-      </section>
-
-      {/* Video Section */}
-      <section className="py-6 md:py-10 bg-black">
-        <div className="mx-auto px-4 sm:px-6 lg:px-8 flex justify-center items-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="rounded-2xl overflow-hidden shadow-2xl"
-            style={{ maxHeight: '80vh' }}
+    <div className="piercing-art" aria-hidden="true">
+      <svg viewBox="0 0 500 500" fill="none">
+        <defs>
+          <linearGradient
+            id="jewellery-gold"
+            x1="120"
+            y1="80"
+            x2="390"
+            y2="420"
+            gradientUnits="userSpaceOnUse"
           >
-            <video
-              autoPlay
-              loop
-              playsInline
-              controls
-              className="w-auto h-auto"
-              style={{ maxHeight: '80vh', maxWidth: '100%' }}
-            >
-              <source src="/homepage.mov" type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Featured Works Section */}
-      <section className="py-20 bg-gradient-to-b from-neutral-900 to-neutral-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
-            <h2 className="text-4xl md:text-5xl font-display font-bold text-white mb-4 text-shadow-lg">
-              Featured Works
-            </h2>
-            <p className="text-neutral-300 text-lg">
-              Explore our latest creations in tattoo art and beauty transformations
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {featuredWorks.map((work, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.2 }}
-                className="image-zoom rounded-2xl overflow-hidden shadow-2xl"
-              >
-                <div className="relative aspect-square">
-                  <Image
-                    src={work.image}
-                    alt={work.title}
-                    fill
-                    className="object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent flex items-end p-6">
-                    <div>
-                      <p className="text-primary-400 text-sm font-semibold mb-1 uppercase tracking-wide">
-                        {work.category}
-                      </p>
-                      <h3 className="text-white text-2xl font-bold text-shadow-lg">{work.title}</h3>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mt-12"
-          >
-            <Link href="/portfolio" className="btn-primary btn-tattoo">
-              View Full Portfolio
-            </Link>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Google Reviews Section */}
-      <section className="py-20 bg-gradient-to-b from-primary-50 to-primary-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center"
-          >
-            <h2 className="text-4xl md:text-5xl font-display font-bold text-neutral-800 mb-4">
-              What Our Clients Say
-            </h2>
-            <p className="text-neutral-600 text-lg mb-8">
-              Read reviews from our valued customers on Google
-            </p>
-
-            {/* Google Reviews Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <motion.a
-                href={siteConfig.reviews.viewReviewsUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="inline-flex items-center gap-2 px-8 py-4 bg-white text-neutral-800 rounded-full font-semibold shadow-lg hover:shadow-xl transition-all border-2 border-primary-500"
-              >
-                <FaStar className="text-yellow-500" />
-                View All Google Reviews
-              </motion.a>
-
-              <motion.a
-                href={siteConfig.reviews.googleReviewsUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-primary-500 to-accent-500 text-white rounded-full font-semibold shadow-lg hover:shadow-xl transition-all"
-              >
-                <FaStar className="text-yellow-300" />
-                Write a Review
-              </motion.a>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-tattoo-dark via-tattoo-red to-beauty-accent text-white text-center">
-        <div className="max-w-4xl mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <h2 className="text-4xl md:text-5xl font-display font-bold mb-6">
-              Ready to Transform?
-            </h2>
-            <p className="text-xl mb-8 text-gray-100">
-              Book your appointment today and experience premium service
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/contact" className="btn-primary bg-white text-tattoo-dark hover:bg-gray-100">
-                Book Appointment
-              </Link>
-              <Link href="/services" className="btn-primary bg-transparent border-2 border-white hover:bg-white hover:text-tattoo-dark">
-                View All Services
-              </Link>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Hygiene & Safety Section */}
-      <section className="py-20 bg-black text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-3 md:mb-4">
-              Your Safety, Our Priority
-            </h2>
-            <p className="text-gray-400 text-sm sm:text-base md:text-lg">
-              We maintain the highest standards of hygiene and safety
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            {[
-              { icon: '🧼', title: 'Sterilized Equipment', desc: 'All tools properly sterilized' },
-              { icon: '✅', title: 'Premium Quality', desc: 'Only certified products used' },
-              { icon: '👨‍⚕️', title: 'Expert Professionals', desc: 'Trained and experienced team' },
-              { icon: '🏆', title: 'Trusted Service', desc: '1000+ happy customers' },
-            ].map((item, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="glass-dark rounded-2xl p-6 text-center card-hover"
-              >
-                <div className="text-5xl mb-4">{item.icon}</div>
-                <h3 className="text-xl font-bold mb-2">{item.title}</h3>
-                <p className="text-gray-400">{item.desc}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+            <stop stopColor="#7f6747" />
+            <stop offset="0.28" stopColor="#ebd9b6" />
+            <stop offset="0.5" stopColor="#af9064" />
+            <stop offset="0.75" stopColor="#f0e1c9" />
+            <stop offset="1" stopColor="#705a3e" />
+          </linearGradient>
+          <filter id="jewellery-shadow">
+            <feGaussianBlur stdDeviation="10" />
+          </filter>
+        </defs>
+        <ellipse
+          cx="270"
+          cy="382"
+          rx="140"
+          ry="28"
+          fill="#000"
+          opacity=".35"
+          filter="url(#jewellery-shadow)"
+        />
+        <g transform="rotate(-28 250 240)">
+          <ellipse
+            cx="222"
+            cy="244"
+            rx="100"
+            ry="139"
+            stroke="#0b0b0a"
+            strokeWidth="20"
+          />
+          <ellipse
+            cx="218"
+            cy="237"
+            rx="100"
+            ry="139"
+            stroke="url(#jewellery-gold)"
+            strokeWidth="10"
+          />
+          <ellipse
+            cx="218"
+            cy="237"
+            rx="96"
+            ry="135"
+            stroke="#eedcba"
+            strokeOpacity=".6"
+            strokeWidth="1"
+          />
+          <circle cx="218" cy="98" r="13" fill="url(#jewellery-gold)" />
+          <circle cx="214" cy="94" r="4" fill="#fff3db" opacity=".6" />
+        </g>
+        <g transform="rotate(26 310 210)">
+          <ellipse
+            cx="314"
+            cy="214"
+            rx="77"
+            ry="108"
+            stroke="#121210"
+            strokeWidth="16"
+          />
+          <ellipse
+            cx="310"
+            cy="208"
+            rx="77"
+            ry="108"
+            stroke="url(#jewellery-gold)"
+            strokeWidth="8"
+          />
+          <ellipse
+            cx="310"
+            cy="208"
+            rx="74"
+            ry="105"
+            stroke="#eedcba"
+            strokeOpacity=".5"
+            strokeWidth="1"
+          />
+          <circle cx="310" cy="100" r="10" fill="url(#jewellery-gold)" />
+          <circle cx="307" cy="97" r="3" fill="#fff3db" opacity=".6" />
+        </g>
+      </svg>
     </div>
   )
 }
 
+export default function Home() {
+  const [brandName, ...brandDetails] = siteConfig.businessName.split(' ')
+  const heroRef = useRef(null)
+  const reducedMotion = useReducedMotion()
+  const [marqueePaused, setMarqueePaused] = useState(false)
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ['start start', 'end start']
+  })
+  const photoY = useTransform(scrollYProgress, [0, 1], ['0%', '18%'])
+  const featuredWorks = ['Tattoo', 'Bridal', 'Facial']
+    .map((category) =>
+      portfolioImages.find((image) => image.category === category)
+    )
+    .filter(Boolean)
+  const beautyCategories = getCategoriesByTheme('beauty')
+  const revealTitle = {
+    hidden: { y: '105%', opacity: 0 },
+    visible: { y: 0, opacity: 1 }
+  }
+
+  return (
+    <>
+      <section className="hero" ref={heroRef} aria-labelledby="hero-heading">
+        <motion.div
+          className="hero-photo"
+          style={{ y: reducedMotion ? 0 : photoY }}
+          initial={reducedMotion ? false : { scale: 1.08, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 1.8 }}
+        >
+          <Image
+            src="/tattoo-studio.jpg"
+            alt="Close detail of tattoo artistry"
+            fill
+            priority
+            sizes="(max-width: 767px) 100vw, 72vw"
+            className="object-cover"
+          />
+        </motion.div>
+        <div className="hero-shade" />
+        <div className="studio-container hero-copy">
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: reducedMotion ? 0 : 0.2 }}
+            className="eyebrow mb-8 flex items-center gap-3"
+          >
+            <span className="h-px w-6 shrink-0 bg-gold" />
+            Tattoo / Piercing / Beauty
+          </motion.p>
+          <motion.h1
+            id="hero-heading"
+            className="display-title hero-title"
+            initial={reducedMotion ? false : 'hidden'}
+            animate="visible"
+            transition={{ staggerChildren: 0.14, delayChildren: 0.2 }}
+          >
+            <span className="block overflow-hidden pb-2">
+              <motion.span
+                className="block text-[clamp(5rem,11vw,10rem)] leading-[0.95] tracking-[0.025em]"
+                variants={revealTitle}
+                transition={{ duration: 1 }}
+              >
+                {brandName.toUpperCase()}
+              </motion.span>
+            </span>
+            <span className="block overflow-hidden pb-3">
+              <motion.em
+                className="block text-[clamp(2.5rem,5.8vw,5.6rem)] leading-[1.1] tracking-[-0.02em]"
+                variants={revealTitle}
+                transition={{ duration: 1 }}
+              >
+                {brandDetails.join(' ')}
+              </motion.em>
+            </span>
+          </motion.h1>
+          <motion.div
+            initial={reducedMotion ? false : { opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: reducedMotion ? 0 : 0.7 }}
+          >
+            <div className="mt-9 flex flex-wrap items-center gap-5 sm:gap-8">
+              <Link href="#studio-services" className="button-primary">
+                Explore services <FiArrowUpRight aria-hidden="true" />
+              </Link>
+              <Link href="/book" className="link-line text-paper/85">
+                Book a session <FiArrowUpRight aria-hidden="true" />
+              </Link>
+            </div>
+          </motion.div>
+        </div>
+        <motion.div
+          aria-hidden="true"
+          className="hero-orbit"
+          initial={{ opacity: 0, rotate: -25 }}
+          animate={{ opacity: 1, rotate: 0 }}
+          transition={{ duration: 1.7, delay: 0.5 }}
+        >
+          <svg
+            viewBox="0 0 80 80"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth=".8"
+          >
+            <path d="M40 4 46 31 73 40 46 49 40 76 34 49 7 40 34 31Z" />
+            <circle cx="40" cy="40" r="19" />
+            <path d="m15 15 50 50m0-50L15 65" opacity=".5" />
+          </svg>
+        </motion.div>
+        <div className="hero-bottom">
+          <div className="studio-container flex items-end justify-between">
+            <p className="text-[9px] uppercase tracking-[0.2em] text-paper/50">
+              {siteConfig.address.city}, {siteConfig.address.state}
+              <br />
+              <span className="mt-2 block text-paper/75">
+                Royal Multiskill Hub
+              </span>
+            </p>
+            <a
+              href="#studio-services"
+              className="flex items-center gap-4 text-[9px] uppercase tracking-[0.2em] text-paper/60"
+            >
+              <span className="hidden sm:inline">View services</span>
+              <span className="scroll-indicator" aria-hidden="true" />
+              <FiArrowDown aria-hidden="true" />
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <div
+        className="marquee relative"
+        aria-label="Tattoo, piercing and beauty services"
+      >
+        <div
+          className="marquee-track"
+          aria-hidden="true"
+          style={{ animationPlayState: marqueePaused ? 'paused' : undefined }}
+        >
+          {[0, 1].map((copy) => (
+            <div key={copy}>
+              {[
+                'Custom tattoos',
+                'Piercing',
+                'Hair & colour',
+                'Beauty & grooming',
+                'Waxing & threading'
+              ].map((item) => (
+                <span
+                  key={item}
+                  className="flex items-center gap-12 text-paper/65"
+                >
+                  {item}
+                  <svg
+                    viewBox="0 0 12 12"
+                    className="h-3 w-3 text-gold"
+                    fill="none"
+                    stroke="currentColor"
+                  >
+                    <path d="M6 0v12M0 6h12M2 2l8 8M2 10l8-8" />
+                  </svg>
+                </span>
+              ))}
+            </div>
+          ))}
+        </div>
+        <button
+          type="button"
+          onClick={() => setMarqueePaused((value) => !value)}
+          className="absolute inset-y-0 left-0 flex w-12 items-center justify-center border-r border-white/10 bg-ink text-gold hover:text-paper"
+          aria-label={
+            marqueePaused
+              ? 'Resume moving service list'
+              : 'Pause moving service list'
+          }
+          aria-pressed={marqueePaused}
+        >
+          {marqueePaused ? (
+            <FiPlay aria-hidden="true" />
+          ) : (
+            <FiPause aria-hidden="true" />
+          )}
+        </button>
+      </div>
+
+      <section
+        id="studio-services"
+        className="section-space"
+        aria-labelledby="services-heading"
+      >
+        <div className="studio-container">
+          <Reveal className="mb-10 flex flex-wrap items-end justify-between gap-6">
+            <h2 id="services-heading" className="section-title">
+              Our services
+            </h2>
+            <Link href="/services" className="link-line">
+              View all prices <FiArrowUpRight aria-hidden="true" />
+            </Link>
+          </Reveal>
+          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+            <Reveal>
+              <Link
+                href="/services#tattoo"
+                className="service-feature group"
+                aria-label="Explore custom tattoo services"
+              >
+                <Image
+                  src="/tattoo-studio.jpg"
+                  alt="Tattoo design in close detail"
+                  fill
+                  sizes="(max-width: 767px) 100vw, 50vw"
+                  className="object-cover"
+                />
+                <div className="feature-copy">
+                  <span className="eyebrow mb-3">01 / Ink</span>
+                  <div className="flex items-end justify-between gap-5">
+                    <div>
+                      <h3 className="font-display text-5xl">Tattoos</h3>
+                      <p className="mt-4 max-w-xs text-sm leading-6 text-paper/65">
+                        {servicesData.tattoo.services[0].price}
+                      </p>
+                    </div>
+                    <span className="flex h-12 w-12 items-center justify-center rounded-full border border-paper/40 transition-colors group-hover:border-gold group-hover:bg-gold group-hover:text-ink">
+                      <FiArrowUpRight aria-hidden="true" className="text-xl" />
+                    </span>
+                  </div>
+                </div>
+              </Link>
+            </Reveal>
+            <Reveal delay={0.12}>
+              <Link
+                href="/services#piercing"
+                className="service-feature group"
+                aria-label="Explore piercing services"
+              >
+                <PiercingArtwork />
+                <div className="feature-copy">
+                  <span className="eyebrow mb-3">02 / Adornment</span>
+                  <div className="flex items-end justify-between gap-5">
+                    <div>
+                      <h3 className="font-display text-5xl">Piercing</h3>
+                      <p className="mt-4 max-w-xs text-sm leading-6 text-paper/65">
+                        {servicesData.piercing.services[0].price}
+                      </p>
+                    </div>
+                    <span className="flex h-12 w-12 items-center justify-center rounded-full border border-paper/40 transition-colors group-hover:border-gold group-hover:bg-gold group-hover:text-ink">
+                      <FiArrowUpRight aria-hidden="true" className="text-xl" />
+                    </span>
+                  </div>
+                </div>
+              </Link>
+            </Reveal>
+            <Reveal delay={0.24} className="md:col-span-2 xl:col-span-1">
+              <Link
+                href="/services#beauty"
+                className="service-feature group"
+                aria-label="Explore beauty, hair, and skin services"
+              >
+                <Image
+                  src="/gallery/beauty-bridal.jpg"
+                  alt="Beauty and makeup inspiration"
+                  fill
+                  sizes="(max-width: 1279px) 100vw, 33vw"
+                  className="object-cover"
+                />
+                <div className="feature-copy">
+                  <span className="eyebrow mb-3">03 / Beauty</span>
+                  <div className="flex items-end justify-between gap-5">
+                    <div>
+                      <h3 className="font-display text-5xl">Beauty</h3>
+                      <p className="mt-4 max-w-xs text-sm leading-6 text-paper/65">
+                        Hair / Skin / Beauty
+                      </p>
+                    </div>
+                    <span className="flex h-12 w-12 items-center justify-center rounded-full border border-paper/40 transition-colors group-hover:border-gold group-hover:bg-gold group-hover:text-ink">
+                      <FiArrowUpRight aria-hidden="true" className="text-xl" />
+                    </span>
+                  </div>
+                </div>
+              </Link>
+            </Reveal>
+          </div>
+          <Reveal className="mt-8 border-t border-white/15 pt-7">
+            <h3 className="eyebrow mb-5">Beauty menu</h3>
+            <div className="flex flex-wrap gap-3">
+              {beautyCategories.map((category) => (
+                <Link
+                  key={category.key}
+                  href={`/services#${category.key}`}
+                  className="filter-button flex items-center gap-4 text-paper"
+                >
+                  {category.title}
+                  <FiArrowUpRight aria-hidden="true" />
+                </Link>
+              ))}
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      <section className="section-space" aria-labelledby="inspiration-heading">
+        <div className="studio-container">
+          <Reveal className="mb-12 flex flex-col justify-between gap-7 sm:flex-row sm:items-end">
+            <h2 id="inspiration-heading" className="section-title">
+              Inspiration
+            </h2>
+            <Link href="/portfolio" className="link-line w-fit">
+              View the gallery <FiArrowUpRight aria-hidden="true" />
+            </Link>
+          </Reveal>
+          <div className="grid gap-7 sm:grid-cols-3">
+            {featuredWorks.map((work, index) => (
+              <Reveal
+                key={work.title}
+                delay={index * 0.1}
+                className={index === 1 ? 'sm:pt-14' : ''}
+              >
+                <Link href="/portfolio" className="work-image group block">
+                  <div className="relative aspect-[3/4] overflow-hidden bg-white/5">
+                    <Image
+                      src={work.src}
+                      alt={work.alt}
+                      fill
+                      sizes="(max-width: 639px) 100vw, 33vw"
+                      className="object-cover"
+                    />
+                    <span className="absolute bottom-5 left-5 text-[9px] uppercase tracking-[0.2em] text-white/80">
+                      Style inspiration
+                    </span>
+                  </div>
+                  <div className="mt-5 flex justify-between border-b border-white/15 pb-4">
+                    <h3 className="font-display text-2xl">{work.title}</h3>
+                    <FiArrowUpRight aria-hidden="true" className="text-gold" />
+                  </div>
+                </Link>
+              </Reveal>
+            ))}
+          </div>
+          <p className="mt-8 text-xs leading-6 text-muted">
+            Reference imagery for inspiration; not studio work.
+          </p>
+        </div>
+      </section>
+
+      <section
+        className="border-y border-white/10 bg-[#191918] py-16 md:py-20"
+        aria-labelledby="studio-film-heading"
+      >
+        <div className="studio-container grid items-center gap-12 lg:grid-cols-2">
+          <Reveal>
+            <h2 id="studio-film-heading" className="section-title">
+              The studio
+            </h2>
+            <p className="mt-6 text-sm leading-7 text-muted">
+              {siteConfig.address.short}
+              <br />
+              {siteConfig.hours.weekdays.time}
+            </p>
+            <div className="mt-8 flex flex-wrap gap-x-8 gap-y-5">
+              <a
+                href={siteConfig.maps.directionsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="link-line"
+              >
+                Directions <FiArrowUpRight aria-hidden="true" />
+              </a>
+              <a
+                href={siteConfig.reviews.viewReviewsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="link-line"
+              >
+                Google reviews <FiArrowUpRight aria-hidden="true" />
+              </a>
+              <a
+                href={siteConfig.reviews.googleReviewsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="link-line"
+              >
+                Leave a review <FiArrowUpRight aria-hidden="true" />
+              </a>
+            </div>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <video
+              controls
+              playsInline
+              preload="none"
+              className="studio-video"
+              aria-label="Royal Multiskill Hub studio film"
+            >
+              <source src="/homepage.mov" />
+              Your browser does not support this video.
+            </video>
+            <a
+              href="/homepage.mov"
+              className="mt-4 inline-block text-xs text-muted underline"
+            >
+              Open the studio film
+            </a>
+          </Reveal>
+        </div>
+      </section>
+
+      <BookingCTA />
+    </>
+  )
+}

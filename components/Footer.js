@@ -1,138 +1,88 @@
 'use client'
 
 import Link from 'next/link'
-import { FaInstagram, FaWhatsapp, FaMapMarkerAlt, FaPhone, FaEnvelope } from 'react-icons/fa'
-import { motion } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
+import { FiArrowUpRight } from 'react-icons/fi'
+import BrandMark from '@/components/BrandMark'
 import siteConfig from '@/config/site'
 
+const exploreLinks = [
+  { name: 'Tattoo', href: '/services#tattoo' },
+  { name: 'Piercing', href: '/services#piercing' },
+  { name: 'Beauty', href: '/services#beauty' },
+  { name: 'Portfolio', href: '/portfolio' },
+]
+
 export default function Footer() {
+  const reducedMotion = useReducedMotion()
   const currentYear = new Date().getFullYear()
-
-  const quickLinks = [
-    { name: 'Home', href: '/' },
-    { name: 'Services', href: '/services' },
-    { name: 'Portfolio', href: '/portfolio' },
-    { name: 'About', href: '/about' },
-    { name: 'Contact', href: '/contact' },
-  ]
-
-  const services = [
-    'Tattoo Studio',
-    'Beauty Parlour',
-    'Hair Services',
-    'Facial Treatments',
-    'Waxing & Threading',
-  ]
+  const [brandName, ...brandDetails] = siteConfig.businessName.split(' ')
+  const socialLinks = [
+    { name: 'Instagram', href: siteConfig.social.instagram },
+    { name: 'Facebook', href: siteConfig.social.facebook },
+    { name: 'YouTube', href: siteConfig.social.youtube },
+  ].filter((link) => link.href)
+  const openingHours = [siteConfig.hours.weekdays, siteConfig.hours.weekend].filter((hours) => hours.days && hours.time)
+  const reveal = (delay = 0) => ({
+    initial: reducedMotion ? false : { opacity: 0, y: 20 },
+    whileInView: { opacity: 1, y: 0 },
+    viewport: { once: true, amount: 0.15 },
+    transition: { duration: 0.65, delay: reducedMotion ? 0 : delay, ease: [0.22, 1, 0.36, 1] },
+  })
 
   return (
-    <footer className="bg-gradient-to-b from-neutral-900 to-neutral-950 text-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {/* Brand Section */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-          >
-            <h3 className="text-2xl font-display font-bold gradient-text mb-4">
-              {siteConfig.businessName}
-            </h3>
-            <p className="text-neutral-300 mb-4 font-medium">
-              {siteConfig.tagline}
-            </p>
-            <p className="text-neutral-400 text-sm leading-relaxed">
-              {siteConfig.description}
-            </p>
-          </motion.div>
-
-          {/* Quick Links */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-          >
-            <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
-            <ul className="space-y-2">
-              {quickLinks.map((link) => (
-                <li key={link.name}>
-                  <Link
-                    href={link.href}
-                    className="text-gray-400 hover:text-beauty-accent transition-colors duration-300"
-                  >
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </motion.div>
-
-          {/* Services */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-          >
-            <h4 className="text-lg font-semibold mb-4">Our Services</h4>
-            <ul className="space-y-2">
-              {services.map((service) => (
-                <li key={service} className="text-gray-400">
-                  {service}
-                </li>
-              ))}
-            </ul>
-          </motion.div>
-
-          {/* Contact Info */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-          >
-            <h4 className="text-lg font-semibold mb-4">Get In Touch</h4>
-            <div className="space-y-3">
-              <a
-                href={siteConfig.whatsapp.getUrl()}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center text-gray-400 hover:text-green-400 transition-colors duration-300"
-              >
-                <FaWhatsapp className="mr-2" />
-                WhatsApp Us
-              </a>
-              {siteConfig.social.instagram && (
-                <a
-                  href={siteConfig.social.instagram}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center text-gray-400 hover:text-pink-400 transition-colors duration-300"
-                >
-                  <FaInstagram className="mr-2" />
-                  Follow on Instagram
+    <footer className="border-t border-paper/10 bg-[#0b0b0a] text-paper">
+      <div className="studio-container">
+        <div className="grid gap-x-10 gap-y-9 py-12 sm:grid-cols-2 md:py-14 lg:grid-cols-[1.3fr_1fr_0.8fr_1.1fr]">
+          <motion.div {...reveal()}>
+            <Link href="/" className="inline-flex items-center gap-3" aria-label={`${siteConfig.businessName} home`}>
+              <BrandMark className="h-[52px] w-[52px] shrink-0 text-gold" />
+              <span className="flex flex-col">
+                <span className="font-display text-[28px] leading-none tracking-[0.16em] text-gold sm:text-[30px]">{brandName.toUpperCase()}</span>
+                <span className="mt-1.5 font-display text-lg leading-tight tracking-wide text-paper">{brandDetails.join(' ')}</span>
+              </span>
+            </Link>
+            <p className="mt-4 text-xs tracking-wide text-paper/50">{siteConfig.tagline}</p>
+            <div className="mt-5 flex flex-wrap gap-5">
+              {socialLinks.map((link) => (
+                <a key={link.name} href={link.href} target="_blank" rel="noopener noreferrer" className="group inline-flex items-center gap-1.5 text-[10px] uppercase tracking-[0.12em] text-paper/70 transition-colors hover:text-gold">
+                  {link.name}<FiArrowUpRight aria-hidden="true" className="text-sm transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 motion-reduce:transform-none" />
                 </a>
-              )}
-              <div className="flex items-center text-gray-400">
-                <FaMapMarkerAlt className="mr-2" />
-                {siteConfig.address.short}
-              </div>
+              ))}
+            </div>
+          </motion.div>
+
+          <motion.div {...reveal(0.06)}>
+            <h3 className="eyebrow mb-5 text-gold">Visit</h3>
+            <address className="not-italic text-sm leading-7 text-paper/60">{siteConfig.address.street},<br />{siteConfig.address.area}, {siteConfig.address.city}<br />{siteConfig.address.state} {siteConfig.address.pincode}</address>
+            <a href={siteConfig.maps.directionsUrl} target="_blank" rel="noopener noreferrer" className="mt-5 inline-flex items-center gap-3 border-b border-paper/25 pb-1 text-xs text-paper transition-colors hover:border-gold hover:text-gold">Get directions <FiArrowUpRight aria-hidden="true" /></a>
+          </motion.div>
+
+          <motion.div {...reveal(0.12)}>
+            <h3 className="eyebrow mb-5 text-gold">Services</h3>
+            <ul className="space-y-3.5">
+              {exploreLinks.map((link) => <li key={link.href}><Link href={link.href} className="text-sm text-paper/60 transition-colors duration-300 hover:text-gold">{link.name}</Link></li>)}
+            </ul>
+          </motion.div>
+
+          <motion.div {...reveal(0.18)}>
+            <h3 className="eyebrow mb-5 text-gold">Contact</h3>
+            <a href={`tel:${siteConfig.contact.phone.replace(/\s/g, '')}`} className="block text-sm text-paper/80 transition-colors hover:text-gold">{siteConfig.contact.phone}</a>
+            <a href={siteConfig.whatsapp.getUrl()} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-2 text-sm text-paper/60 transition-colors hover:text-gold">Enquire on WhatsApp <FiArrowUpRight aria-hidden="true" /></a>
+            <div className="mt-5 space-y-3 border-t border-paper/10 pt-4">
+              {openingHours.map((hours) => <p key={hours.days} className="text-xs leading-6 text-paper/50"><span className="block text-paper/70">{hours.days}</span>{hours.time}</p>)}
             </div>
           </motion.div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="border-t border-gray-800 mt-8 pt-8 text-center">
-          <p className="text-gray-400 text-sm">
-            © {currentYear} {siteConfig.businessName}. All rights reserved.
-          </p>
-          <p className="text-gray-500 text-xs mt-2">
-            Crafted with passion for ink and beauty
-          </p>
+        <div className="flex flex-wrap justify-between gap-3 border-t border-paper/10 py-5 text-[10px] leading-5 tracking-[0.05em] text-paper/40">
+          <p>© {currentYear} {siteConfig.businessName}. All rights reserved.</p>
+          <div className="flex flex-wrap items-center gap-x-5">
+            <Link href="/my-requests" className="inline-flex min-h-[44px] items-center py-2 transition-colors hover:text-gold">My requests</Link>
+            <Link href="/owner" className="inline-flex min-h-[44px] items-center py-2 transition-colors hover:text-gold">Owner sign in</Link>
+          </div>
         </div>
       </div>
     </footer>
   )
 }
-

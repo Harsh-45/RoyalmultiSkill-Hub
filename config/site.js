@@ -8,8 +8,8 @@
 export const siteConfig = {
   // Business Information
   businessName: "Royal Multiskill Hub",
-  tagline: "Ink • Beauty • Confidence",
-  description: "Premium tattoo studio and beauty parlour offering professional services in tattoos, hair care, facials, and beauty treatments.",
+  tagline: "Tattoo / Piercing / Beauty",
+  description: "A personal approach to tattoo art, piercing, and beauty at Royal Multiskill Hub in Amgaon, Maharashtra. Explore our services and book a consultation.",
   
   // Contact Information
   contact: {
@@ -108,7 +108,7 @@ export const siteConfig = {
   // WhatsApp Message Templates
   whatsapp: {
     // Default message
-    defaultMessage: "Hi! I want to book an appointment for Tattoo or Beauty Service",
+    defaultMessage: "Hi! I'd like to book a consultation for a tattoo, piercing, or beauty service.",
     
     // Service inquiry message
     serviceMessage: (serviceName) => 
@@ -125,7 +125,7 @@ export const siteConfig = {
   
   // SEO & Meta Information
   seo: {
-    keywords: "tattoo, beauty parlour, hair salon, facial, waxing, threading, hair color, tattoo studio, beauty services",
+    keywords: "tattoo studio Amgaon, piercing Amgaon, tattoo artist, piercing consultation, custom tattoos, beauty services, Royal Multiskill Hub",
     author: "Royal Multiskill Hub",
     ogImage: "/og-image.jpg", // Add your Open Graph image to public folder
   },

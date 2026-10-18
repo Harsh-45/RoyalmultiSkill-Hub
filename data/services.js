@@ -1,7 +1,6 @@
 export const servicesData = {
   waxing: {
     title: "Waxing",
-    icon: "✨",
     theme: "beauty",
     services: [
       { name: "Upper Lips", price: "₹50" },
@@ -19,7 +18,6 @@ export const servicesData = {
   },
   threading: {
     title: "Threading",
-    icon: "🧵",
     theme: "beauty",
     services: [
       { name: "Eyebrows", price: "₹30" },
@@ -31,7 +29,6 @@ export const servicesData = {
   },
   hairServices: {
     title: "Hair Services",
-    icon: "💇",
     theme: "beauty",
     services: [
       { name: "Hair Wash with Conditioner", price: "₹100" },
@@ -46,7 +43,6 @@ export const servicesData = {
   },
   hairColour: {
     title: "Hair Colour",
-    icon: "🎨",
     theme: "beauty",
     services: [
       { name: "Rough Touch", price: "₹200–500" },
@@ -58,7 +54,6 @@ export const servicesData = {
   },
   hairChemical: {
     title: "Hair Chemical Treatments",
-    icon: "⚗️",
     theme: "beauty",
     services: [
       { name: "Hair Wash with Conditioner", price: "₹300" },
@@ -74,7 +69,6 @@ export const servicesData = {
   },
   additionalHair: {
     title: "Additional Hair Services",
-    icon: "💫",
     theme: "beauty",
     services: [
       { name: "Hair Ironing", price: "₹300 (Depends on Length)" },
@@ -85,7 +79,6 @@ export const servicesData = {
   },
   faceCare: {
     title: "Face Care",
-    icon: "🌸",
     theme: "beauty",
     services: [
       { name: "Cleaning", price: "₹100" },
@@ -105,13 +98,20 @@ export const servicesData = {
     ],
   },
   tattoo: {
-    title: "Tattoo Pricing",
-    icon: "🖋️",
+    title: "Custom tattoos",
     theme: "tattoo",
     services: [
       { name: "Custom Tattoo", price: "₹400 per inch", featured: true },
     ],
     description: "Professional custom tattoos with premium quality ink and hygiene standards.",
+  },
+  piercing: {
+    title: "Piercing",
+    theme: "piercing",
+    services: [
+      { name: "Piercing consultation", price: "Enquire for pricing" },
+    ],
+    description: "A personal approach to placement and style. Get in touch to discuss available piercing services, jewellery options, and pricing.",
   },
 };
 
